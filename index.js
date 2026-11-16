@@ -33,7 +33,15 @@ app.post("/api/chat", async (req, res) => {
                     "Authorization": `Bearer ${process.env.
                     OPENROUTER_API_KEY}`
                 },
+                body: JSON.stringify({
+                    model: "inclusiionai/ling-3.2-flash:free",
+                    messages: message,
+                    temperature: 0.7,
+                    max_tokens: 1000,
+                    stream: true
+                })
             }
-        )
+        );
+        
     }
 }
