@@ -1,7 +1,7 @@
-const express = require("express");
-const dotenv = require("dotenv");
+const express = require("express")
+const dotenv = require("dotenv")
 
-dotenv.config();
+dotenv.config()
 
 const app = express();
 const PORT = 3000;
@@ -14,12 +14,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/chat", async (req, res) => {
-    try {
-        const message = req.body;
+    try{
+        const messages = req.body.messages;
 
-        if (!message || !Array.isArray(message)) {
-            return res.status(400).json({ 
-                error: "Messages harus berupa array" 
+        if (!messages || !Array.isArray(messages)) {
+            return res.status(400).json({
+                error: "Messages harus berupa array"
             });
         }
 
@@ -30,18 +30,17 @@ app.post("/api/chat", async (req, res) => {
 
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${process.env.
-                    OPENROUTER_API_KEY}`
+                    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`
                 },
+
                 body: JSON.stringify({
-                    model: "inclusiionai/ling-3.2-flash:free",
-                    messages: message,
+                    model: "inclusionai/ling-3.2-flash:free",
+                    messages: messages,
                     temperature: 0.7,
                     max_tokens: 1000,
                     stream: true
                 })
             }
         );
-        
-    }
-}
+
+       
